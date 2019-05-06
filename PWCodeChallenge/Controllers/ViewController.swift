@@ -21,9 +21,10 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         pets = Pet.make()
         petTable.reloadData()
+        
+        //I use notifications to avoid tight coupling and lifecycle issues
         NotificationCenter.default.addObserver(self, selector: #selector(cellOpened(_:)), name: cellOpenedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(cellClosed(_:)), name: cellClosedNotification, object: nil)
     }
@@ -60,6 +61,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomCell
+        //I understand the tag system might become unwieldy if the table became more complex, I would probably change over to a dictionary keying a different identifier (possibly the pet) to the width in that case
         cell.tag = indexPath.row
         var openWidth: CGFloat = 0
         if indexPath.row == openCellTag {

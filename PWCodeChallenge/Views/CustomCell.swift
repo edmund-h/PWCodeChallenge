@@ -39,33 +39,6 @@ class CustomCell: UITableViewCell {
         self.contentView.layoutSubviews()
     }
     
-    func addToAreaWidth(_ translation: CGFloat) {
-        var const = buttonAreaWidthConstraint.constant
-        const += translation
-        buttonAreaWidthConstraint.constant = const
-        self.contentView.layoutSubviews()
-        NotificationCenter.default.post(name: self.cellOpenedNotification, object: nil, userInfo: [self.cellOpenedNotification : self.tag])
-    }
-    
-    func animateTo(width: CGFloat) {
-        let max = 0.5 * contentView.frame.width
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
-            self.buttonAreaWidthConstraint.constant = max * -1
-            self.contentView.layoutIfNeeded()
-        }, completion: { _ in
-            NotificationCenter.default.post(name: self.cellOpenedNotification, object: nil, userInfo: [self.cellOpenedNotification : self.tag])
-        })
-    }
-    
-    func animateClosed() {
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
-                self.buttonAreaWidthConstraint.constant = 0
-                self.contentView.layoutIfNeeded()
-            }, completion: { _ in
-                NotificationCenter.default.post(name: self.cellClosedNotification, object: nil, userInfo: [self.cellClosedNotification : self.tag])
-            })
-    }
-    
     @objc func changeButtonAreaWidth(sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: self.contentView)
         guard abs(translation.x) > abs(translation.y) * 2 else {
@@ -87,6 +60,34 @@ class CustomCell: UITableViewCell {
         default:
             break
         }
+    }
+    
+    func addToAreaWidth(_ translation: CGFloat) {
+        var const = buttonAreaWidthConstraint.constant
+        const += translation
+        buttonAreaWidthConstraint.constant = const
+        self.contentView.layoutSubviews()
+        //moving this logic to the completed state of the changeButtonAreaWidth function might remedy potential issues
+        NotificationCenter.default.post(name: self.cellOpenedNotification, object: nil, userInfo: [self.cellOpenedNotification : self.tag])
+    }
+    
+    func animateTo(width: CGFloat) {
+        let max = 0.5 * contentView.frame.width
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
+            self.buttonAreaWidthConstraint.constant = max * -1
+            self.contentView.layoutIfNeeded()
+        }, completion: { _ in
+            NotificationCenter.default.post(name: self.cellOpenedNotification, object: nil, userInfo: [self.cellOpenedNotification : self.tag])
+        })
+    }
+    
+    func animateClosed() {
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
+                self.buttonAreaWidthConstraint.constant = 0
+                self.contentView.layoutIfNeeded()
+            }, completion: { _ in
+                NotificationCenter.default.post(name: self.cellClosedNotification, object: nil, userInfo: [self.cellClosedNotification : self.tag])
+            })
     }
     
     override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {

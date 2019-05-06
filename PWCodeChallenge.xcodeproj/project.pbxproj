@@ -58,16 +58,40 @@
 		88CC6DB62280A60A00954854 /* PWCodeChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				88CC6DCF2280DE3100954854 /* Model */,
+				88CC6DCD2280DE1800954854 /* Views */,
+				88CC6DD02280DE4700954854 /* Controllers */,
 				88CC6DB72280A60A00954854 /* AppDelegate.swift */,
-				88CC6DB92280A60A00954854 /* ViewController.swift */,
-				88CC6DC92280AA3F00954854 /* CustomCell.swift */,
-				88CC6DCB2280AA7C00954854 /* Pet.swift */,
 				88CC6DBB2280A60A00954854 /* Main.storyboard */,
 				88CC6DBE2280A60E00954854 /* Assets.xcassets */,
 				88CC6DC02280A60E00954854 /* LaunchScreen.storyboard */,
 				88CC6DC32280A60E00954854 /* Info.plist */,
 			);
 			path = PWCodeChallenge;
+			sourceTree = "<group>";
+		};
+		88CC6DCD2280DE1800954854 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				88CC6DC92280AA3F00954854 /* CustomCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		88CC6DCF2280DE3100954854 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				88CC6DCB2280AA7C00954854 /* Pet.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		88CC6DD02280DE4700954854 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				88CC6DB92280A60A00954854 /* ViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
